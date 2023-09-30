@@ -1,0 +1,312 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOHUws1xveQeym9Z4aSFSx4",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/DanB1421/DATA601/blob/main/task4.__ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "pcjB1m461kxU"
+      },
+      "outputs": [],
+      "source": [
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "import numpy as np"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "The first step for this task is to create pandas dataframes from the previously obtained CSV files."
+      ],
+      "metadata": {
+        "id": "3VR2Lqx7GQen"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df1_final = pd.read_csv('/content/df1_final.csv', index_col=0) # reads the cs.AI CSV from Task 1 and treats the first column as an index\n",
+        "df2_final = pd.read_csv('/content/df2_final.csv', index_col=0) # reads the cs.LG CSV from Task 1 and treats the first column as an index\n",
+        "df3_final = pd.read_csv('/content/df3_final.csv', index_col=0) # reads the cs.CC CSV from Task 1 and treats the first column as an index\n",
+        "df4_final = pd.read_csv('/content/df4_final.csv', index_col=0) # reads the cs.AR CSV from Task 1 and treats the first column as an index"
+      ],
+      "metadata": {
+        "id": "cXkXWQ_I16ob"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "The second step for this task is to filter each data frame by year, count the number of papers (rows) each year contains using the shape function, and append the paper counts for each year to a list."
+      ],
+      "metadata": {
+        "id": "UxmaRZAIK_Yb"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df1_data_list = [] # creates a list\n",
+        "\n",
+        "df1_filter_2017 = (df1_final['published'] >= '2017-01-01') & (df1_final['published'] < '2018-01-01') # creates a filter that only includes cs.AI papers published in 2017\n",
+        "df1_2017 = df1_final.loc[df1_filter_2017] # applies filter to create new dataframe\n",
+        "df1_data_list.append(df1_2017.shape[0]) # appends the number of entries for 2017 to df1_data_list\n",
+        "\n",
+        "df1_filter_2018 = (df1_final['published'] >= '2018-01-01') & (df1_final['published'] < '2019-01-01') # creates a filter that only includes cs.AI papers published in 2018\n",
+        "df1_2018 = df1_final.loc[df1_filter_2018] # applies filter to create new dataframe\n",
+        "df1_data_list.append(df1_2018.shape[0]) # appends the number of entries for 2018 to df1_data_list\n",
+        "\n",
+        "df1_filter_2019 = (df1_final['published'] >= '2019-01-01') & (df1_final['published'] < '2020-01-01') # creates a filter that only includes cs.AI papers published in 2019\n",
+        "df1_2019 = df1_final.loc[df1_filter_2019] # applies filter to create new dataframe\n",
+        "df1_data_list.append(df1_2019.shape[0]) # appends the number of entries for 2019 to df1_data_list\n",
+        "\n",
+        "df1_filter_2020 = (df1_final['published'] >= '2020-01-01') & (df1_final['published'] < '2021-01-01') # creates a filter that only includes cs.AI papers published in 2020\n",
+        "df1_2020 = df1_final.loc[df1_filter_2020] # applies filter to create new dataframe\n",
+        "df1_data_list.append(df1_2020.shape[0]) # appends the number of entries for 2020 to df1_data_list\n",
+        "\n",
+        "df1_filter_2021 = (df1_final['published'] >= '2021-01-01') & (df1_final['published'] < '2022-01-01') # creates a filter that only includes cs.AI papers published in 2021\n",
+        "df1_2021 = df1_final.loc[df1_filter_2021] # applies filter to create new dataframe\n",
+        "df1_data_list.append(df1_2021.shape[0]) # appends the number of entries for 2021 to df1_data_list\n",
+        "\n",
+        "print(df1_data_list) # shows the data in df1_data_list"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "kn8zBk-T2dQs",
+        "outputId": "4bf0ee9c-1fd5-44b9-b3b0-9c708630d79c"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[1209, 1442, 1210, 1915, 2130]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df2_data_list = [] # creates a list\n",
+        "\n",
+        "df2_filter_2017 = (df2_final['published'] >= '2017-01-01') & (df2_final['published'] < '2018-01-01') # creates a filter that only includes cs.LG papers published in 2017\n",
+        "df2_2017 = df2_final.loc[df2_filter_2017] # applies filter to create new dataframe\n",
+        "df2_data_list.append(df2_2017.shape[0]) # appends the number of entries for 2017 to df2_data_list\n",
+        "\n",
+        "df2_filter_2018 = (df2_final['published'] >= '2018-01-01') & (df2_final['published'] < '2019-01-01') # creates a filter that only includes cs.LG papers published in 2018\n",
+        "df2_2018 = df2_final.loc[df2_filter_2018] # applies filter to create new dataframe\n",
+        "df2_data_list.append(df2_2018.shape[0]) # appends the number of entries for 2018 to df2_data_list\n",
+        "\n",
+        "df2_filter_2019 = (df2_final['published'] >= '2019-01-01') & (df2_final['published'] < '2020-01-01') # creates a filter that only includes cs.LG papers published in 2019\n",
+        "df2_2019 = df2_final.loc[df2_filter_2019] # applies filter to create new dataframe\n",
+        "df2_data_list.append(df2_2019.shape[0]) # appends the number of entries for 2019 to df2_data_list\n",
+        "\n",
+        "df2_filter_2020 = (df2_final['published'] >= '2020-01-01') & (df2_final['published'] < '2021-01-01') # creates a filter that only includes cs.LG papers published in 2020\n",
+        "df2_2020 = df2_final.loc[df2_filter_2020] # applies filter to create new dataframe\n",
+        "df2_data_list.append(df2_2020.shape[0]) # appends the number of entries for 2020 to df2_data_list\n",
+        "\n",
+        "df2_filter_2021 = (df2_final['published'] >= '2021-01-01') & (df2_final['published'] < '2022-01-01') # creates a filter that only includes cs.LG papers published in 2021\n",
+        "df2_2021 = df2_final.loc[df2_filter_2021] # applies filter to create new dataframe\n",
+        "df2_data_list.append(df2_2021.shape[0]) # appends the number of entries for 2021 to df2_data_list\n",
+        "\n",
+        "print(df2_data_list) # shows the data in df2_data_list"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "XqlgJyf48QX_",
+        "outputId": "213cc837-e7be-4bd7-b3d5-2ce440cebb50"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[2255, 4498, 8409, 7824, 8036]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df3_data_list = [] # creates a list\n",
+        "\n",
+        "df3_filter_2017 = (df3_final['published'] >= '2017-01-01') & (df3_final['published'] < '2018-01-01') # creates a filter that only includes cs.CC papers published in 2017\n",
+        "df3_2017 = df3_final.loc[df3_filter_2017] # applies filter to create new dataframe\n",
+        "df3_data_list.append(df3_2017.shape[0]) # appends the number of entries for 2017 to df3_data_list\n",
+        "\n",
+        "df3_filter_2018 = (df3_final['published'] >= '2018-01-01') & (df3_final['published'] < '2019-01-01') # creates a filter that only includes cs.CC papers published in 2018\n",
+        "df3_2018 = df3_final.loc[df3_filter_2018] # applies filter to create new dataframe\n",
+        "df3_data_list.append(df3_2018.shape[0]) # appends the number of entries for 2018 to df3_data_list\n",
+        "\n",
+        "df3_filter_2019 = (df3_final['published'] >= '2019-01-01') & (df3_final['published'] < '2020-01-01') # creates a filter that only includes cs.CC papers published in 2019\n",
+        "df3_2019 = df3_final.loc[df3_filter_2019] # applies filter to create new dataframe\n",
+        "df3_data_list.append(df3_2019.shape[0]) # appends the number of entries for 2019 to df3_data_list\n",
+        "\n",
+        "df3_filter_2020 = (df3_final['published'] >= '2020-01-01') & (df3_final['published'] < '2021-01-01') # creates a filter that only includes cs.CC papers published in 2020\n",
+        "df3_2020 = df3_final.loc[df3_filter_2020] # applies filter to create new dataframe\n",
+        "df3_data_list.append(df3_2020.shape[0]) # appends the number of entries for 2020 to df3_data_list\n",
+        "\n",
+        "df3_filter_2021 = (df3_final['published'] >= '2021-01-01') & (df3_final['published'] < '2022-01-01') # creates a filter that only includes cs.CC papers published in 2021\n",
+        "df3_2021 = df3_final.loc[df3_filter_2021] # applies filter to create new dataframe\n",
+        "df3_data_list.append(df3_2021.shape[0]) # appends the number of entries for 2021 to df3_data_list\n",
+        "\n",
+        "print(df3_data_list) # shows the data in df3_data_list"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "3KyHBfAAAK0N",
+        "outputId": "b1bfa43c-ca29-4ff4-bf40-cac2c96a6fce"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[311, 283, 326, 342, 322]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df4_data_list = [] # creates a list\n",
+        "\n",
+        "df4_filter_2017 = (df4_final['published'] >= '2017-01-01') & (df4_final['published'] < '2018-01-01') # creates a filter that only includes cs.AR papers published in 2017\n",
+        "df4_2017 = df4_final.loc[df4_filter_2017] # applies filter to create new dataframe\n",
+        "df4_data_list.append(df4_2017.shape[0]) # appends the number of entries for 2017 to df4_data_list\n",
+        "\n",
+        "df4_filter_2018 = (df4_final['published'] >= '2018-01-01') & (df4_final['published'] < '2019-01-01') # creates a filter that only includes cs.AR papers published in 2018\n",
+        "df4_2018 = df4_final.loc[df4_filter_2018] # applies filter to create new dataframe\n",
+        "df4_data_list.append(df4_2018.shape[0]) # appends the number of entries for 2018 to df4_data_list\n",
+        "\n",
+        "df4_filter_2019 = (df4_final['published'] >= '2019-01-01') & (df4_final['published'] < '2020-01-01') # creates a filter that only includes cs.AR papers published in 2019\n",
+        "df4_2019 = df4_final.loc[df4_filter_2019] # applies filter to create new dataframe\n",
+        "df4_data_list.append(df4_2019.shape[0]) # appends the number of entries for 2019 to df4_data_list\n",
+        "\n",
+        "df4_filter_2020 = (df4_final['published'] >= '2020-01-01') & (df4_final['published'] < '2021-01-01') # creates a filter that only includes cs.AR papers published in 2020\n",
+        "df4_2020 = df4_final.loc[df4_filter_2020] # applies filter to create new dataframe\n",
+        "df4_data_list.append(df4_2020.shape[0]) # appends the number of entries for 2020 to df4_data_list\n",
+        "\n",
+        "df4_filter_2021 = (df4_final['published'] >= '2021-01-01') & (df4_final['published'] < '2022-01-01') # creates a filter that only includes cs.AR papers published in 2021\n",
+        "df4_2021 = df4_final.loc[df4_filter_2021] # applies filter to create new dataframe\n",
+        "df4_data_list.append(df4_2021.shape[0]) # appends the number of entries for 2021 to df4_data_list\n",
+        "\n",
+        "print(df4_data_list) # shows the data in df4_data_list"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "-EyAKFMqBkb3",
+        "outputId": "008f8e6a-9dab-44cb-c058-2bada4462733"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[127, 122, 136, 310, 387]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "The final step of this task is to create a labeled bar graph with the paper counts from each data frame, organized by year and labeled by primary category."
+      ],
+      "metadata": {
+        "id": "D_9M7GBBLVuD"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "year_labels = [2017, 2018, 2019, 2020, 2021] # creates years labels for the bar graph\n",
+        "fig, ax = plt.subplots() # creates a plot that can be made from multiple elements\n",
+        "\n",
+        "x = np.arange(len(year_labels)) # creates evenly spaced values with the interval given by the amount of elements in year_labels\n",
+        "width = 0.20 # value used for bar graph spacing\n",
+        "\n",
+        "\n",
+        "ax.bar(x - (1.5*width), df1_data_list, width, label=\"cs.AI\") # creates first bar for each year with cs.AI values\n",
+        "ax.bar(x - width/2, df2_data_list, width, label=\"cs.LG\") # creates second bar for each year with cs.LG values\n",
+        "ax.bar(x + width/2, df3_data_list, width, label=\"cs.CC\") # creates third bar for each year with cs.CC values\n",
+        "ax.bar(x + (1.5*width), df4_data_list, width, label=\"cs.AR\") # creates fourth bar for each year with cs.AR values\n",
+        "\n",
+        "ax.set_ylabel('Number of papers') # labels the y axis with \"Number of papers\"\n",
+        "ax.set_title('Papers per Year by Primary Category') # titles the bar graph 'Papers per Year by Primary Category'\n",
+        "plt.ylim(0,9000) # sets the y axis range between 0 and 9000\n",
+        "\n",
+        "ax.set_xticks(x) # creates ticks from x interval\n",
+        "ax.set_xticklabels(year_labels) # labels x axis with year_labels\n",
+        "ax.legend(loc=\"upper left\") # creates a legend in the upper left corner\n",
+        "plt.show() # displays bar graph"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 281
+        },
+        "id": "y97Aax5WChpk",
+        "outputId": "7e143253-a585-45ea-e75e-fd585bb5a3da"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<Figure size 432x288 with 1 Axes>"
+            ],
+            "image/png": "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\n"
+          },
+          "metadata": {
+            "needs_background": "light"
+          }
+        }
+      ]
+    }
+  ]
+}
